@@ -1,0 +1,723 @@
+import turtle as trtl
+painter=trtl.Turtle()
+
+name = input("What is your name? ")
+drawing_type = input("Would you like to draw a house or a vehicle? (Enter either house or vehicle) ")
+
+if drawing_type=="house":
+  #enter code for choosing house stuff
+  house_size=input("Would you like a large, medium, or small house (Enter large, medium, or small) ")
+  window_count=input("How many windows do you want your house to have? (Enter a number 1 or 2) ")
+  wall_color=input("What color do you want your walls to be? ")
+  door_count=input("Do you want a single or a double door? (Enter single or double) ")
+  door_color=input("What color do you want your door(s) to be? ")
+  roof_height=input("How tall do you want your roof to be? (Enter short, medium, or tall) ")
+  roof_color=input("What color do you want your roof to be? ")
+
+  if house_size== "large":
+    size=200
+  elif house_size== "medium":
+    size=150
+  else:
+    size=100
+  #make walls and color them
+  try:
+    painter.fillcolor(wall_color)
+  except trtl.TurtleGraphicsError:
+    painter.fillcolor("white")
+    
+  painter.begin_fill()
+  for x in range (4):
+    painter.forward(size)
+    painter.left(90)
+  painter.end_fill()
+  painter.fillcolor("white")
+  
+  
+  if window_count=="1":
+    #make 1 window
+    painter.penup()
+    painter.goto(size/5, 2*size/3)
+    painter.pendown()
+    painter.begin_fill()
+    for x in range(4):
+      painter.forward(size/8)
+      painter.left(90)
+    painter.end_fill()
+    painter.goto(size/5 + size/16, 2*size/3)
+    painter.left(90)
+    painter.forward(size/8)
+    painter.penup()
+    painter.goto(size/5, 2*size/3 + size/16)
+    painter.pendown()
+    painter.right(90)
+    painter.forward(size/8)
+
+  if window_count=="2":
+    #first window
+    painter.penup()
+    painter.goto(size/5, 2*size/3)
+    painter.pendown()
+    painter.begin_fill()
+    for x in range(4):
+      painter.forward(size/8)
+      painter.left(90)
+    painter.end_fill()
+    painter.goto(size/5 + size/16, 2*size/3)
+    painter.left(90)
+    painter.forward(size/8)
+    painter.penup()
+    painter.goto(size/5, 2*size/3 + size/16)
+    painter.pendown()
+    painter.right(90)
+    painter.forward(size/8)
+    #window number 2
+    painter.penup()
+    painter.goto(4*size/5, 2*size/3)
+    painter.pendown()
+    painter.begin_fill()
+    for x in range(4):
+      painter.backward(size/8)
+      painter.right(90)
+    painter.end_fill()
+    painter.goto(4*size/5 - size/16, 2*size/3)
+    painter.right(90)
+    painter.backward(size/8)
+    painter.penup()
+    painter.goto(4*size/5, 2*size/3 + size/16)
+    painter.pendown()
+    painter.right(90)
+    painter.forward(size/8)
+    
+  #create door
+  if door_count=="single":
+    painter.fillcolor(door_color)
+    painter.penup()
+    painter.goto(size/2-size/10, 0)
+    painter.begin_fill()
+    painter.pendown()
+    painter.setheading(90)
+    painter.forward(size/2)
+    painter.right(90)
+    painter.forward(size/5)
+    painter.right(90)
+    painter.forward(size/2)
+    painter.end_fill()
+    painter.penup()
+    painter.goto(size/2+size/15,size/3)
+    painter.pendown()
+    if door_color == "black":
+      painter.fillcolor("brown")
+    else:
+      painter.fillcolor("black")
+    painter.begin_fill()
+    painter.circle(2)
+    painter.end_fill()
+    painter.penup()
+
+  #code for double door
+  if door_count=="double":
+    painter.fillcolor(door_color)
+    painter.penup()
+    painter.goto(size/2-size/5, 0)
+    painter.begin_fill()
+    painter.pendown()
+    painter.setheading(90)
+    painter.forward(size/2)
+    painter.right(90)
+    painter.forward(size/2.5)
+    painter.right(90)
+    painter.forward(size/2)
+    painter.right(90)
+    painter.forward(size/2.5)
+    painter.end_fill()
+    painter.backward(size/5)
+    painter.right(90)
+    painter.forward(size/2)
+    painter.end_fill()
+    painter.penup()
+    painter.goto(size/2-size/15,size/3)
+    painter.pendown()
+    if door_color == "black":
+      painter.fillcolor("brown")
+    else:
+      painter.fillcolor("black")
+    painter.begin_fill()
+    painter.circle(2)
+    painter.end_fill()
+    painter.penup()
+    painter.goto(size/2+size/15, size/3)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(2)
+    painter.end_fill()
+    painter.penup()
+  
+  if roof_height=="short":
+    painter.goto(0, size)
+    painter.fillcolor(roof_color)
+    painter.begin_fill()
+    painter.pendown()
+    painter.setheading(30)
+    painter.backward(size/7)
+    painter.forward(size*0.57735+size/7)
+    painter.setheading(-30)
+    painter.forward(size*0.57735)
+    painter.end_fill()
+    painter.forward(size/7)
+  elif roof_height=="tall":
+    painter.goto(0, size)
+    painter.fillcolor(roof_color)
+    painter.begin_fill()
+    painter.pendown()
+    painter.setheading(60)
+    painter.backward(size/3)
+    painter.forward(size+size/3)
+    painter.setheading(-60)
+    painter.forward(size)
+    painter.end_fill()
+    painter.forward(size/3)
+  else: 
+    painter.goto(0, size)
+    painter.fillcolor(roof_color)
+    painter.begin_fill()
+    painter.pendown()
+    painter.setheading(45)
+    painter.backward(size/4)
+    painter.forward(106.066017178+size/4)
+    painter.setheading(-45)
+    painter.forward(106.066017178)
+    painter.end_fill()
+    painter.forward(size/4)
+
+
+
+  
+    
+
+
+if drawing_type=="vehicle":
+  vehicle_type=input("What type of vehicle would you like to make? (Enter truck, car, or plane) ")
+  if vehicle_type=="truck":
+    truck_size=input("How big do you want your truck to be? (Enter large, medium, or small) ")
+    truck_color=input("What color do you want your truck's body to be? ")
+    truck_cab_type=input("Do you want a flat or slanted truck cab? (Enter flat or slanted) ")
+    truck_cab_color=input("What color do you want your truck cab to be? ")
+    truck_wheel_size=input("How big do you want your wheels to be? (Enter large, medium, or small) ")
+
+
+#create truck body and color it
+    if truck_size==("large"):
+      size=300
+      painter.penup()
+      painter.goto(-size/2, 0)
+      painter.pendown()
+      painter.fillcolor(truck_color)
+      painter.begin_fill()
+      painter.forward(size)
+      painter.left(90)
+      painter.forward(size/2)
+      painter.left(90)
+      painter.forward(size)
+      painter.left(90)
+      painter.forward(size/2)
+      painter.end_fill()
+
+    elif truck_size==("small"):
+      size=100
+      painter.penup()
+      painter.goto(-size/2, 0)
+      painter.pendown()
+      painter.fillcolor(truck_color)
+      painter.begin_fill()
+      painter.forward(size)
+      painter.left(90)
+      painter.forward(size/2)
+      painter.left(90)
+      painter.forward(size)
+      painter.left(90)
+      painter.forward(size/2)
+      painter.end_fill()
+    else:
+      size=200
+      painter.penup()
+      painter.goto(-size/2, 0)
+      painter.pendown()
+      painter.fillcolor(truck_color)
+      painter.begin_fill()
+      painter.forward(size)
+      painter.left(90)
+      painter.forward(size/2)
+      painter.left(90)
+      painter.forward(size)
+      painter.left(90)
+      painter.forward(size/2)
+      painter.end_fill()
+
+    painter.penup()
+    painter.setheading(0)
+
+  #create truck cab and color it
+    if truck_cab_type=="flat":
+      painter.goto(size/2, size/2-size/40)
+      painter.fillcolor(truck_cab_color)
+      painter.begin_fill()
+      painter.pendown()
+      painter.forward(size/3)
+      painter.right(90)
+      painter.forward(size/2-size/39)
+      painter.right(90)
+      painter.forward(size/3)
+      painter.end_fill()
+      #make window
+      painter.setheading(0)
+      painter.goto(size/1.6, size/2.8)
+      painter.pendown()
+      if truck_cab_color=="light blue":
+        painter.fillcolor("white")
+      else:
+        painter.fillcolor("light blue")
+      painter.begin_fill()
+      for x in range(2):
+        painter.forward(size/8)
+        painter.right(90)
+        painter.forward(size/6)
+        painter.right(90)
+      painter.end_fill()
+
+    if truck_cab_type=="slanted":
+      painter.goto(size/2, size/2-size/40)
+      painter.fillcolor(truck_cab_color)
+      painter.begin_fill()
+      painter.pendown()
+      painter.forward(size/5)
+      painter.goto(size/1.1, size/100)
+      painter.goto(size/2, size/100)
+      painter.end_fill()
+      painter.setheading(0)
+      painter.penup()
+      #make window
+      painter.goto(size/1.75, size/2.8)
+      painter.setheading(0)
+      painter.pendown()
+      if truck_cab_color=="light blue":
+        painter.fillcolor("white")
+      else:
+        painter.fillcolor("light blue")
+      painter.begin_fill()
+      for x in range(2):
+        painter.forward(size/8)
+        painter.right(90)
+        painter.forward(size/6)
+        painter.right(90)
+      painter.end_fill()
+
+
+    painter.penup()
+
+    painter.setheading(180)
+    if truck_wheel_size == "large":
+      painter.goto(size/4,size/8)
+      painter.pendown()
+      painter.fillcolor("black")
+      painter.begin_fill()
+      painter.circle(size/8)
+      painter.end_fill()
+      painter.penup()
+      painter.goto(-size/4,size/8)
+      painter.pendown()
+      painter.fillcolor("black")
+      painter.begin_fill()
+      painter.circle(size/8)
+      painter.end_fill()
+      painter.hideturtle()
+    elif truck_wheel_size == "small":
+      painter.goto(size/4,size/15)
+      painter.pendown()
+      painter.fillcolor("black")
+      painter.begin_fill()
+      painter.circle(size/15)
+      painter.end_fill()
+      painter.penup()
+      painter.goto(-size/4,size/15)
+      painter.pendown()
+      painter.fillcolor("black")
+      painter.begin_fill()
+      painter.circle(size/15)
+      painter.end_fill()
+      painter.hideturtle()
+    else:
+      painter.goto(size/4,size/11)
+      painter.pendown()
+      painter.fillcolor("black")
+      painter.begin_fill()
+      painter.circle(size/11)
+      painter.end_fill()
+      painter.penup()
+      painter.goto(-size/4,size/11)
+      painter.pendown()
+      painter.fillcolor("black")
+      painter.begin_fill()
+      painter.circle(size/11)
+      painter.end_fill()
+
+      painter.hideturtle()
+
+
+
+    
+  if vehicle_type=="car":
+    #enter code for choosing car stuff
+    car_size=input("How big do you want your car to be? (Enter large, medium, or small) ")
+    car_color=input("What color do you want your car to be? ")
+    car_roof=input("Do you want a roof on your car? (Enter yes or no) ")
+    car_wheel_size=input("How big do you want your car's wheels to be? (Enter large, medium, or small) ")
+
+    if car_size=="large":
+      size=400
+    elif car_size=="small":
+      size=100
+    else:
+      size=250
+    painter.setheading(0)
+    painter.goto(-size/2,0)
+    painter.fillcolor(car_color)
+    painter.begin_fill()
+    for x in range(2):
+      painter.forward(size)
+      painter.left(90)
+      painter.forward(size/4)
+      painter.left(90)
+    painter.end_fill()
+    
+    
+    if car_roof == "no":
+      painter.penup()
+      painter.goto(size/3,size/4)
+      painter.setheading(120)
+      painter.pendown()
+      painter.circle(size, 10)
+    else:
+      painter.begin_fill()
+      painter.penup()
+      painter.goto(size/3,size/4)
+      painter.setheading(120)
+      painter.pendown()
+      painter.circle(size/2.5, 120)
+      painter.end_fill()
+      painter.penup()
+      if car_color == "black":
+        painter.fillcolor("light blue")
+      else:
+        painter.fillcolor("black")
+      painter.goto(0, 11*size/40)
+      painter.setheading(0)
+      painter.pendown()
+      painter.begin_fill()
+      for x in range(2):
+        painter.forward(size/5)
+        painter.left(90)
+        painter.forward(size/10)
+        painter.left(90)
+      painter.end_fill()
+      painter.penup()
+      painter.goto(0 - size/30, 11*size/40)
+      painter.setheading(180)
+      painter.pendown()
+      painter.begin_fill()
+      for x in range(2):
+        painter.forward(size/5)
+        painter.right(90)
+        painter.forward(size/10)
+        painter.right(90)
+      painter.end_fill()
+    painter.penup()
+    painter.setheading(0)
+    if car_color=="black":
+      painter.fillcolor("dark gray")
+    else:
+      painter.fillcolor("black")
+    if car_wheel_size == "large":
+      painter.begin_fill()
+      painter.goto(size/4, -size/7)
+      painter.pendown()
+      painter.circle(size/7)
+      painter.end_fill()
+      painter.penup()
+      painter.begin_fill()
+      painter.goto(-size/4, -size/7)
+      painter.pendown()
+      painter.circle(size/7)
+      painter.end_fill()
+    elif car_wheel_size == "small":
+      painter.begin_fill()
+      painter.goto(size/4, -size/13)
+      painter.pendown()
+      painter.circle(size/13)
+      painter.end_fill()
+      painter.penup()
+      painter.begin_fill()
+      painter.goto(-size/4, -size/13)
+      painter.pendown()
+      painter.circle(size/13)
+      painter.end_fill()
+    else:
+      painter.begin_fill()
+      painter.goto(size/4, -size/10)
+      painter.pendown()
+      painter.circle(size/10)
+      painter.end_fill()
+      painter.penup()
+      painter.begin_fill()
+      painter.goto(-size/4, -size/10)
+      painter.pendown()
+      painter.circle(size/10)
+      painter.end_fill()
+    painter.penup()
+    painter.goto(size/2-size/13, size/4)
+    painter.pendown()
+    painter.setheading(-90)
+    painter.fillcolor("yellow")
+    painter.begin_fill()
+    for x in range(4):
+      painter.forward(size/13)
+      painter.left(90)
+    painter.end_fill()
+  if vehicle_type=="plane":
+    plane_size = input("What size do you want your plane to be? (Enter small, medium, or large) ")
+    plane_body_color = input("What color do you want the body of your plane to be? ")
+    plane_tail_color = input("What color do you want the tail of your plane to be? ")
+    plane_nose_color = input ("What color do you want the nose of your plane to be? ")
+    landing_gear_color = input("What color do you want your plane's landing gear to be? ")
+    cockpit_color = input("What color do you want the cockpit to be? I recommend light blue. ")
+    if plane_size == "large":
+      size = 250
+    elif plane_size == "small":
+      size = 100
+    elif plane_size == "medium":
+      size = 175
+    else: 
+      size = 175
+      print("Your size has been defaulted to medium due to an error in your input.")
+    size=175
+    
+    #block thingy at front of plane
+    painter.fillcolor(landing_gear_color)
+    painter.penup()
+    painter.goto(size/2,0)
+    painter.pendown()
+    painter.setheading(90)
+    painter.forward(size/12)
+    painter.begin_fill()
+    painter.backward(size/12)
+    painter.setheading(0)
+    painter.pendown()
+    painter.forward(size/3)
+    painter.setheading(90)
+    painter.forward(size/6)
+    painter.end_fill()
+    #landing gear 2
+    painter.penup()
+    painter.goto(size/2+size/8,0)
+    painter.pendown()
+    painter.setheading(-90)
+    painter.begin_fill()
+    painter.circle(-size/3.33,45)
+    painter.penup()
+    painter.goto(size/2+size/13, -size/4.4)
+    painter.pendown()
+    painter.setheading(45)
+    painter.circle(size/3.1,45)
+    painter.end_fill()
+
+    #wheel 2
+    painter.penup()
+    painter.goto(size/1.4,-size/3)
+    painter.setheading(113)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(size/5,130)
+    x2=painter.xcor()
+    y2=painter.ycor()
+    painter.goto(size/1.4, -size/3)
+    painter.goto(x2,y2)
+    painter.end_fill()
+    painter.setheading(-2)
+    painter.forward(size/18.5)
+    painter.setheading(270)
+    painter.fillcolor("black")
+    painter.begin_fill()
+    painter.circle(size/8,175)
+    painter.end_fill()
+    #front of plane
+    painter.penup()
+    painter.goto(0,0)
+    painter.pendown()
+    painter.fillcolor(plane_body_color)
+    painter.begin_fill()
+    painter.setheading(7)
+    painter.circle(6*size, 10)
+    painter.penup()
+    x_nose = painter.xcor()
+    y_nose = painter.ycor()
+    painter.setheading(90)
+    painter.forward(size/7)
+
+    painter.left(60)
+    painter.pendown()
+    painter.circle(1.5*size, 30)
+    painter.left(90)
+    painter.setheading(120)
+
+    #cockpit
+    
+    x_cockpit = painter.xcor()
+    y_cockpit = painter.ycor()
+    painter.circle(size/3,105)
+
+    painter.setheading(195)
+    painter.forward(size/1.2)
+    painter.right(85)
+    painter.forward(size/2.5)
+    painter.setheading(180)
+    painter.forward(size/3.5 - size/10.5)
+    x_tail = painter.xcor()
+    y_tail = painter.ycor()
+    painter.setheading(270)
+    painter.forward(size/1.43)
+    painter.setheading(90)
+    
+    painter.forward(size/1.43)
+    painter.left(90)
+    painter.forward(size/10.5)
+    painter.left(90)
+    painter.forward(size/1.45)
+    
+    painter.setheading(-7.5)
+    painter.circle(10.7*size,8)
+    painter.end_fill()
+    painter.goto(0,0)
+    painter.setheading(10)
+    painter.forward(size/8)
+    painter.setheading(90)
+    painter.fillcolor("gray")
+    painter.begin_fill()
+    painter.circle(size/8,70)
+    painter.setheading(180)
+    painter.circle(size/1.8, 40)
+    painter.goto(0,0)
+    painter.end_fill()
+    #landing gear 1
+    painter.fillcolor(landing_gear_color)
+    painter.penup()
+    painter.goto(0,0)
+    painter.pendown()
+    painter.begin_fill()
+    painter.setheading(-90)
+    painter.circle(-size/3.33,45)
+    painter.penup()
+    painter.goto(-size/20,-size/4.4)
+    painter.pendown()
+    painter.setheading(45)
+    painter.circle(size/3.1,45)
+    painter.end_fill()
+    #wheel 1
+    painter.penup()
+    painter.goto(size/14,-size/3)
+    painter.setheading(113)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(size/5,130)
+    x1=painter.xcor()
+    y1=painter.ycor()
+    painter.goto(size/14, -size/3)
+    painter.goto(x1,y1)
+    painter.end_fill()
+    painter.setheading(-2)
+    painter.forward(size/18.5)
+    painter.setheading(270)
+    painter.fillcolor("black")
+    painter.begin_fill()
+    painter.circle(size/8,175)
+    painter.end_fill()
+    painter.penup()
+    
+
+    #nose
+    painter.fillcolor(plane_nose_color)
+    painter.setheading(90)
+    painter.penup()
+    painter.goto(x_nose,y_nose)
+    painter.forward(size/13)
+    painter.right(90)
+    painter.forward(size/6)
+    painter.setheading(90)
+    painter.pendown()
+    painter.begin_fill()
+    painter.circle(size/8, 360, 3)
+    painter.end_fill()
+    #cockpit_fill
+    painter.penup()
+    painter.goto(x_cockpit,y_cockpit)
+    painter.pendown()
+    painter.fillcolor(cockpit_color)
+    painter.begin_fill()
+    painter.setheading(120)
+    x_cockpit = painter.xcor()
+    y_cockpit = painter.ycor()
+    painter.circle(size/3,105)
+    x=painter.xcor()
+    y=painter.ycor()
+    painter.setheading(342)
+    painter.circle(1.52*size,20)
+    painter.end_fill()
+    painter.penup()
+    painter.pendown()
+    painter.circle(1.52*size, -20)
+    painter.penup()
+    #tail fill
+    painter.goto(x_tail,y_tail)
+    painter.fillcolor(plane_tail_color)
+    painter.setheading(270)
+    painter.forward(size/1.43)
+    painter.setheading(90)
+    painter.begin_fill()  
+    painter.forward(size/1.43)
+    painter.left(90)
+    painter.forward(size/10.5)
+    painter.left(90)
+    painter.forward(size/1.45)
+        
+    painter.setheading(-7.5)
+    painter.end_fill()
+
+    painter.penup()
+    painter.goto(x_cockpit, y_cockpit)
+    painter.setheading(270)
+    painter.pendown()
+    painter.forward(size/1.95)
+
+painter.penup()
+if drawing_type == "house":
+  painter.goto(0,-size/4)
+  painter.write(name + "'s house", font=("Times New Roman", int(size/5)))
+if drawing_type == "vehicle":
+  if vehicle_type == "car":
+    painter.goto(-50, 0.5*size)
+  if vehicle_type == "plane":
+    painter.goto(-50,size)
+  if vehicle_type == "truck":
+    painter.goto(-50, 0.75*size)
+  painter.write(name + "'s " + vehicle_type, font=("Times New Roman", int(size/5)))
+
+
+
+painter.hideturtle()
+
+
+
+
+
+
+wn = trtl.Screen()
+wn.mainloop()
